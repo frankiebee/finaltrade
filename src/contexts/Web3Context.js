@@ -21,8 +21,9 @@ export const Web3Provider = ({ children }) => {
   // Simulate wallet connection
   const connectWallet = async () => {
     try {
+      const mmAccount = await connectMetaMaskAndSwitchToOptimismSepolia()
       // This is a mock function for the prototype
-      setAccount('0x71C7656EC7ab88b098defB751B7401B5f6d8976F');
+      setAccount(mmAccount)
       setIsConnected(true);
       return true;
     } catch (error) {
@@ -57,5 +58,58 @@ export const Web3Provider = ({ children }) => {
     </Web3Context.Provider>
   );
 };
+
+export async function connectMetaMaskAndSwitchToOptimismSepolia() {
+  const optimismSepoliaChainId = '0xaa37dc'; // 11155420 in hex
+
+  const optimismSepoliaParams = {
+    chainId: optimismSepoliaChainId,
+    chainName: 'Optimism Sepolia Testnet',
+    nativeCurrency: {
+      name: 'Ethereum',
+      symbol: 'ETH',
+      decimals: 18
+    },
+    rpcUrls: ['https://sepolia.optimism.io'],
+    blockExplorerUrls: ['https://sepolia-optimism.etherscan.io']
+  };
+
+  try {
+    if (!window.ethereum) {
+      throw new Error('MetaMask is not installed');
+    }
+
+    const accounts = await window.ethereum.request({
+      method: 'eth_requestAccounts'
+    });
+
+    const account = accounts[0];
+    console.log('Connected account:', account);
+
+    try {
+      await window.ethereum.request({
+        method: 'wallet_switchEthereumChain',
+        params: [{ chainId: optimismSepoliaChainId }]
+      });
+      console.log('Switched to Optimism Sepolia Testnet');
+    } catch (switchError) {
+      if (switchError.code === 4902) {
+        // Chain not added, try to add it
+        await window.ethereum.request({
+          method: 'wallet_addEthereumChain',
+          params: [optimismSepoliaParams]
+        });
+        console.log('Added and switched to Optimism Sepolia Testnet');
+      } else {
+        throw switchError;
+      }
+    }
+
+    return account;
+  } catch (error) {
+    console.error('Error connecting to MetaMask or switching network:', error);
+    throw error;
+  }
+}
 
 export default Web3Context;
