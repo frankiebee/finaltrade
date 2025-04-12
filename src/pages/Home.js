@@ -148,7 +148,6 @@ const Home = () => {
             >
               Read Greypaper
             </Button>
-            
             {!isConnected && (
               <Button 
                 variant="contained" 
