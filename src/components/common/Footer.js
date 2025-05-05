@@ -14,7 +14,7 @@ const Footer = () => {
     >
       <Container>
         <Typography variant="body2" color="text.secondary" align="center">
-          © 2025 Final Trade. All rights reserved.
+        
         </Typography>
       </Container>
     </Box>

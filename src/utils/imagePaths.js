@@ -1,21 +1,19 @@
+// src/utils/imagePaths.js
+const basePath = process.env.PUBLIC_URL || '';
 
-// Handles image paths for consistent references across environments
-const getImagePath = (imageName) => {
-  // Use absolute URL for deployed site
-  if (process.env.NODE_ENV === 'production') {
-    return `https://saraswathi.github.io/finaltrade/assets/images/${imageName}`;
-  }
-  // Use relative path for development
-  return `${process.env.PUBLIC_URL}/assets/images/${imageName}`;
+export const IMAGES = {
+  background: `${basePath}/assets/images/neon_hum.png`,
+  toedLogo: `${basePath}/assets/images/toed-logo.png`,
+  mnrchLogo: `${basePath}/assets/images/mnrch-logo.png`,
+  monarch: `${basePath}/assets/images/monarch.png`,
+  sloth: `${basePath}/assets/images/sloth.png`,
+  neonHum: `${basePath}/assets/images/neon_hum.png`,
+  solarArena: `${basePath}/assets/images/Solar_Cyber_Arena.png`,
+  logo: `${basePath}/assets/images/final_trade_logo.png`,
 };
 
-// Export specific image paths for easy access
-export const IMAGES = {
-  background: getImagePath('cyberpunk-alley-bg.jpg'),
-  toedLogo: getImagePath('toed-logo.png'),
-  mnrchLogo: getImagePath('mnrch-logo.png'),
-  monarch: getImagePath('monarch.png'),
-  sloth: getImagePath('sloth.png'),
+const getImagePath = (imageName) => {
+  return `${basePath}/assets/images/${imageName}`;
 };
 
 export default getImagePath;

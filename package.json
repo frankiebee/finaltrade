@@ -32,7 +32,7 @@
     "web3modal": "^1.9.12"
   },
   "devDependencies": {
-    "gh-pages": "^6.1.1"
+    "gh-pages": "^6.3.0"
   },
   "browserslist": {
     "production": [

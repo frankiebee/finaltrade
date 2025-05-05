@@ -1,0 +1,1557 @@
+{getHealthSegments(healthScores[species2.id] || 50).map((segment, i) => (
+                  <Box 
+                    key={`health-segment-sloth-${i}`}
+                    sx={{
+                      width: '100%',
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: segment === 'active' 
+                        ? species2Color
+                        : 'rgba(0, 255, 247, 0.2)',
+                      boxShadow: segment === 'active'
+                        ? `0 0 8px ${species2Color}`
+                        : 'none'
+                    }}
+                  />
+                ))}
+              </Box>
+            </Box>
+
+            {/* Stats Panel */}
+            <Box sx={{ 
+              p: 2,
+              borderRadius: 3,
+              border: `1px solid ${species2Color}`,
+              background: 'rgba(0, 0, 0, 0.3)',
+              boxShadow: `0 0 15px ${species2Color}`,
+              position: 'relative',
+              mb: 2
+            }}>
+              {/* Buffs Section */}
+              <Typography sx={{ 
+                color: '#00FFF7', 
+                fontFamily: "'Rajdhani', sans-serif",
+                fontWeight: 600,
+                fontSize: '1.2rem',
+                mb: 1,
+                textShadow: '0 0 5px #00FFF7'
+              }}>
+                BUFFS
+              </Typography>
+              
+              {/* Buff Icons */}
+              <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+                <Box className="buff-icon active">
+                  <span role="img" aria-label="Power">⚡</span>
+                </Box>
+                <Box className="buff-icon">
+                  <span role="img" aria-label="Volume">📊</span>
+                </Box>
+                <Box className="buff-icon">
+                  <span role="img" aria-label="Crowd">👥</span>
+                </Box>
+              </Box>
+
+              {/* Volatility Meter */}
+              <Typography sx={{ 
+                color: '#00FFF7', 
+                fontFamily: "'Rajdhani', sans-serif",
+                fontWeight: 600,
+                fontSize: '1.2rem',
+                mb: 1,
+                textShadow: '0 0 5px #00FFF7'
+              }}>
+                VOLATILITY
+              </Typography>
+              
+              <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
+                <Box 
+                  component="span" 
+                  sx={{ 
+                    color: '#FFD93D', 
+                    fontFamily: "'Space Mono', monospace",
+                    fontWeight: 'bold',
+                    fontSize: '1.3rem',
+                    mr: 1,
+                    textShadow: '0 0 5px #FFD93D'
+                  }}
+                >
+                  {(tokenData[species2.id]?.volatility || 0.65).toFixed(2)}
+                </Box>
+                <Box 
+                  className={`volatility-line ${getVolatilityClass(tokenData[species2.id]?.volatility || 0.65)}`}
+                  sx={{ flex: 1, height: 20 }}
+                />
+              </Box>
+
+              {/* Price Streak */}
+              <Typography sx={{ 
+                color: '#00FFF7', 
+                fontFamily: "'Rajdhani', sans-serif",
+                fontWeight: 600,
+                fontSize: '1.2rem',
+                mb: 1,
+                textShadow: '0 0 5px #00FFF7'
+              }}>
+                PRICE STREAK
+              </Typography>
+              
+              <Box 
+                className="price-streak-line"
+                sx={{ 
+                  height: 30,
+                  mb: 2,
+                  position: 'relative'
+                }}
+              />
+
+              {/* Combo Section */}
+              <Typography sx={{ 
+                color: '#00FFF7', 
+                fontFamily: "'Rajdhani', sans-serif",
+                fontWeight: 600,
+                fontSize: '1.2rem',
+                mb: 1,
+                textShadow: '0 0 5px #00FFF7'
+              }}>
+                COMBO
+              </Typography>
+              
+              <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+                <Box className="combo-icon active">
+                  <span role="img" aria-label="Combo 1">🔄</span>
+                </Box>
+                <Box className="combo-icon active">
+                  <span role="img" aria-label="Combo 2">🔄</span>
+                </Box>
+                <Box className="combo-icon">
+                  <span role="img" aria-label="Combo 3">🔄</span>
+                </Box>
+              </Box>
+
+              {/* TradeStreak Bar */}
+              <Box 
+                sx={{ 
+                  p: 1, 
+                  borderRadius: 2, 
+                  background: 'rgba(0, 0, 0, 0.5)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  mb: 2
+                }}
+              >
+                <Typography sx={{ 
+                  color: '#FFD93D', 
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontWeight: 'bold',
+                  mb: 1,
+                  textShadow: '0 0 5px #FFD93D'
+                }}>
+                  TRADETRE'AK
+                </Typography>
+                
+                <Box className="trade-streak-bar">
+                  <Box 
+                    className="trade-streak-fill"
+                    sx={{ width: '60%' }}
+                  />
+                </Box>
+              </Box>
+
+              {/* Volume Percentage */}
+              <Box 
+                sx={{ 
+                  position: 'absolute',
+                  bottom: 0,
+                  left: 0,
+                  px: 2,
+                  py: 1,
+                  borderRadius: '0 0 0 8px',
+                  background: 'linear-gradient(90deg, rgba(0, 255, 247, 0.8), transparent)',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography sx={{ 
+                  color: '#00FFF7', 
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem',
+                  mr: 1
+                }}>
+                  VOL
+                </Typography>
+                
+                <Typography sx={{ 
+                  color: '#00FFF7', 
+                  fontFamily: "'Space Mono', monospace",
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem'
+                }}>
+                  40%
+                </Typography>
+              </Box>
+            </Box>
+          </Grid>
+
+          {/* Center VS Area */}
+          <Grid item xs={2} md={2} sx={{ 
+            display: 'flex', 
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
+            position: 'relative',
+            zIndex: 3
+          }}>
+            <Typography 
+              variant="h1" 
+              sx={{ 
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: { xs: '3rem', md: '5rem' },
+                color: '#FFD93D',
+                textShadow: '0 0 15px #FFD93D, 0 0 30px #FF3D00',
+                fontWeight: 'bold',
+                mb: 5
+              }}
+            >
+              VS
+            </Typography>
+            
+            <Typography 
+              variant="h2" 
+              sx={{ 
+                fontFamily: "'Orbitron', sans-serif",
+                fontSize: { xs: '2.5rem', md: '4rem' },
+                background: 'linear-gradient(135deg, #FF9100, #FF3EC9)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent',
+                textShadow: '0 0 15px rgba(255, 145, 0, 0.7)',
+                fontWeight: 'bold',
+                transform: 'rotate(-5deg)',
+                mb: 3
+              }}
+            >
+              FIGHT!
+            </Typography>
+            
+            <Box sx={{ 
+              textAlign: 'center',
+              mb: 2
+            }}>
+              <Typography sx={{ 
+                color: '#FF3EC9', 
+                fontFamily: "'Rajdhani', sans-serif",
+                fontWeight: 'bold',
+                fontSize: '1.2rem',
+                mb: 0.5,
+                textShadow: '0 0 5px #FF3EC9'
+              }}>
+                TRADE
+              </Typography>
+              <Typography sx={{ 
+                color: '#00FFF7', 
+                fontFamily: "'Rajdhani', sans-serif",
+                fontWeight: 'bold',
+                fontSize: '1rem',
+                textShadow: '0 0 5px #00FFF7'
+              }}>
+                STREAK
+              </Typography>
+            </Box>
+            
+            {/* Price Delta Indicator */}
+            <Box sx={{ 
+              width: 80,
+              height: 80,
+              borderRadius: '50%',
+              background: 'radial-gradient(circle, rgba(255,145,0,0.2) 0%, rgba(0,0,0,0.5) 100%)',
+              border: '2px solid rgba(255, 255, 255, 0.2)',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+              mb: 2
+            }}>
+              <Box sx={{ 
+                width: 60,
+                height: 60,
+                borderRadius: '50%',
+                background: 'linear-gradient(135deg, #FF3EC9, #00FFF7)',
+                animation: 'pulse 2s infinite'
+              }} />
+            </Box>
+            
+            <Typography sx={{ 
+              color: '#fff', 
+              fontFamily: "'Rajdhani', sans-serif",
+              fontWeight: 'bold',
+              fontSize: '1.2rem',
+              mb: 1,
+              textShadow: '0 0 5px rgba(255, 255, 255, 0.7)'
+            }}>
+              PRICE DELTA
+            </Typography>
+          </Grid>
+
+          {/* Right Character (Monarch) */}
+          <Grid item xs={5} md={5} sx={{ position: 'relative', textAlign: 'right' }}>
+            {/* Character Name */}
+            <Box sx={{ 
+              mb: 2, 
+              textAlign: 'center', 
+              position: 'relative',
+              display: 'inline-block',
+              px: 2,
+              py: 0.5,
+              borderRadius: 4,
+              border: `2px solid ${species1Color}`,
+              boxShadow: `0 0 15px ${species1Color}`,
+              background: 'rgba(0, 0, 0, 0.5)',
+            }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontFamily: "'Orbitron', sans-serif",
+                  color: species1Color,
+                  textShadow: `0 0 10px ${species1Color}`,
+                  letterSpacing: '0.1em',
+                  fontWeight: 'bold'
+                }}
+              >
+                {species1Name}
+              </Typography>
+            </Box>
+            
+            {/* Health Bar (DNA Style) */}
+            <Box sx={{ mb: 1, px: 2 }}>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between',
+                gap: 1,
+                mb: 0.5
+              }}>
+                {getHealthSegments(healthScores[species1.id] || 50).map((segment, i) => (
+                  <Box 
+                    key={`health-segment-monarch-${i}`}
+                    sx={{
+                      width: '100%',
+                      height: 10,
+                      borderRadius: 5,
+                      backgroundColor: segment === 'active' 
+                        ? species1Color
+                        : 'rgba(255, 140, 0, 0.2)',
+                      boxShadow: segment === 'active'
+                        ? `0 0 8px ${species1Color}`
+                        : 'none'
+                    }}
+                  />
+                ))}
+              </Box>
+            </Box>
+
+            {/* Stats Panel */}
+            <Box sx={{ 
+              p: 2,
+              borderRadius: 3,
+              border: `1px solid ${species1Color}`,
+              background: 'rgba(0, 0, 0, 0.3)',
+              boxShadow: `0 0 15px ${species1Color}`,
+              position: 'relative',
+              mb: 2
+            }}>
+              {/* Alerts Section */}
+              <Typography sx={{ 
+                color: '#FF3EC9', 
+                fontFamily: "'Rajdhani', sans-serif",
+                fontWeight: 600,
+                fontSize: '1.2rem',
+                mb: 1,
+                textShadow: '0 0 5px #FF3EC9',
+                textAlign: 'right'
+              }}>
+                ALERTS
+              </Typography>
+              
+              {/* Alert Badge */}
+              <Box sx={{ 
+                textAlign: 'right',
+                mb: 4
+              }}>
+                <Box sx={{ 
+                  display: 'inline-block',
+                  px: 2,
+                  py: 0.5,
+                  borderRadius: 2,
+                  background: 'rgba(255, 62, 201, 0.2)',
+                  border: '1px solid #FF3EC9',
+                  boxShadow: '0 0 10px #FF3EC9'
+                }}>
+                  <Typography sx={{ 
+                    color: '#FF3EC9', 
+                    fontFamily: "'Rajdhani', sans-serif",
+                    fontWeight: 'bold',
+                    textShadow: '0 0 5px #FF3EC9'
+                  }}>
+                    SLAP STICKY RALLY!
+                  </Typography>
+                </Box>
+              </Box>
+
+              {/* Stats Space (Matching left side for symmetry) */}
+              <Box sx={{ mb: 14 }}>
+                {/* Empty space to match left side */}
+              </Box>
+
+              {/* Volume Percentage */}
+              <Box 
+                sx={{ 
+                  position: 'absolute',
+                  bottom: 0,
+                  right: 0,
+                  px: 2,
+                  py: 1,
+                  borderRadius: '0 0 8px 0',
+                  background: 'linear-gradient(90deg, transparent, rgba(255, 140, 0, 0.8))',
+                  display: 'flex',
+                  alignItems: 'center',
+                }}
+              >
+                <Typography sx={{ 
+                  color: '#FF8C00', 
+                  fontFamily: "'Space Mono', monospace",
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem',
+                  mr: 1
+                }}>
+                  40
+                </Typography>
+                
+                <Typography sx={{ 
+                  color: '#FF8C00', 
+                  fontFamily: "'Orbitron', sans-serif",
+                  fontWeight: 'bold',
+                  fontSize: '1.5rem'
+                }}>
+                  %
+                </Typography>
+                
+                <Box 
+                  sx={{ 
+                    display: 'inline-block',
+                    ml: 1,
+                    mt: 0.5
+                  }}
+                >
+                  <Typography sx={{ 
+                    color: '#00e676', 
+                    fontFamily: "'Rajdhani', sans-serif",
+                    fontWeight: 'bold',
+                    fontSize: '1.2rem'
+                  }}>
+                    ≈≈≈
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
+          </Grid>
+        </Grid>
+
+        {/* Character Sprites */}
+        <Box sx={{ 
+          position: 'relative',
+          height: 300,
+          mx: 'auto',
+          mb: 4,
+          zIndex: 1
+        }}>
+          {/* Sloth Character */}
+          <Box 
+            sx={{ 
+              position: 'absolute', 
+              left: '20%', 
+              bottom: 0,
+              transform: 'translateX(-50%)',
+              zIndex: 2
+            }}
+          >
+            <img 
+              src={`${process.env.PUBLIC_URL}/assets/images/sloth.png`}
+              alt="Sloth"
+              style={{ 
+                height: 280,
+                filter: `drop-shadow(0 0 15px rgba(0, 255, 247, 0.7))`,
+                transform: 'scaleX(-1)' // Flip to face opponent
+              }} 
+            />
+            
+            {/* Move Indicator */}
+            {currentMoves[species2.id] && (
+              <Box 
+                sx={{ 
+                  position: 'absolute',
+                  top: -30,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  px: 2,
+                  py: 0.5,
+                  borderRadius: 2,
+                  background: 'rgba(0, 255, 247, 0.2)',
+                  border: '1px solid #00FFF7',
+                  boxShadow: '0 0 10px #00FFF7',
+                  animation: 'fadeIn 0.3s'
+                }}
+              >
+                <Typography sx={{ 
+                  color: '#00FFF7', 
+                  fontFamily: "'Rajdhani', sans-serif",
+                  fontWeight: 'bold',
+                  textShadow: '0 0 5px #00FFF7'
+                }}>
+                  {currentMoves[species2.id].name}
+                </Typography>
+              </Box>
+            )}
+          </Box>
+          
+          {/* Monarch Character */}
+          <Box 
+            sx={{ 
+              position: 'absolute', 
+              right: '20%', 
+              bottom: 0,
+              transform: 'translateX(50%)',
+              zIndex: 2
+            }}
+          >
+            <img 
+              src={`${process.env.PUBLIC_URL}/assets/images/monarch.png`}
+              alt="Monarch"
+              style={{ 
+                height: 280,
+                filter: `drop-shadow(0 0 15px rgba(255, 140, 0, 0.7))`
+              }} 
+            />
+            
+            {/* Move Indicator */}
+            {currentMoves[species1.id] && (
+              <Box 
+                sx={{ 
+                  position: 'absolute',
+                  top: -30,
+                  left: '50%',
+                  transform: 'translateX(-50%)',
+                  px: 2,
+                  py: 0.5,
+                  borderRadius: 2,
+                  background: 'rgba(255, 140, 0, 0.2)',
+                  border: '1px solid #FF8C00',
+                  boxShadow: '0 0 10px #FF8C00',
+                  animation: 'fadeIn 0.3s'
+                }}
+              >
+                <Typography sx={{ 
+                  color: '#FF8C00', 
+                  fontFamily: "'Rajdhani', sans-serif",
+                  fontWeight: 'bold',
+                  textShadow: '0 0 5px #FF8C00'
+                }}>
+                  {currentMoves[species1.id].name}
+                </Typography>
+              </Box>
+            )}
+          </Box>
+        </Box>
+
+        {/* Bottom Market Cap Progress */}
+        <Box 
+          sx={{ 
+            position: 'relative',
+            mx: 2,
+            mb: 2,
+            zIndex: 2
+          }}
+        >
+          <Box sx={{ 
+            height: 20,
+            borderRadius: 10,
+            background: 'rgba(0, 0, 0, 0.5)',
+            border: '1px solid rgba(255, 255, 255, 0.2)',
+            position: 'relative',
+            overflow: 'hidden'
+          }}>
+            <Box sx={{ 
+              height: '100%',
+              width: `${(500000 / 1000000) * 100}%`,
+              background: 'linear-gradient(90deg, #FFD93D, #00FFF7, #FF3EC9)',
+              boxShadow: '0 0 15px rgba(0, 255, 247, 0.7)',
+              borderRadius: 10
+            }} />
+            
+            {/* Milestone Markers */}
+            <Box sx={{ 
+              position: 'absolute', 
+              bottom: -25, 
+              left: 0, 
+              width: '100%',
+              display: 'flex',
+              justifyContent: 'space-between',
+              px: 2
+            }}>
+              <Typography 
+                sx={{ 
+                  color: '#FFD93D', 
+                  fontFamily: "'Space Mono', monospace",
+                  fontWeight: 'bold',
+                  textShadow: '0 0 5px rgba(255, 217, 61, 0.7)'
+                }}
+              >
+                $50%
+              </Typography>
+              
+              <Typography 
+                sx={{ 
+                  color: '#00FFF7', 
+                  fontFamily: "'Space Mono', monospace",
+                  fontWeight: 'bold',
+                  textShadow: '0 0 5px rgba(0, 255, 247, 0.7)'
+                }}
+              >
+                $500K
+              </Typography>
+              
+              <Typography 
+                sx={{ 
+                  color: '#FF3EC9', 
+                  fontFamily: "'Space Mono', monospace",
+                  fontWeight: 'bold',
+                  textShadow: '0 0 5px rgba(255, 62, 201, 0.7)'
+                }}
+              >
+                $1M
+              </Typography>
+            </Box>
+          </Box>
+        </Box>
+
+        {/* Control Panel Button */}
+        <Button
+          variant="contained"
+          onClick={() => setShowControlPanel(!showControlPanel)}
+          sx={{
+            position: 'fixed',
+            bottom: 20,
+            right: 20,
+            borderRadius: '50%',
+            minWidth: 50,
+            width: 50,
+            height: 50,
+            background: 'rgba(0, 0, 0, 0.5)',
+            border: '1px solid #00FFF7',
+            boxShadow: '0 0 10px #00FFF7',
+            zIndex: 10
+          }}
+        >
+          <span role="img" aria-label="Controls">⚙️</span>
+        </Button>
+
+        {/* Control Panel Slide-in */}
+        <Box
+          sx={{
+            position: 'fixed',
+            right: showControlPanel ? 0 : '-300px',
+            top: 0,
+            height: '100vh',
+            width: 300,
+            background: 'rgba(0, 0, 0, 0.8)',
+            backdropFilter: 'blur(10px)',
+            borderLeft: '1px solid #00FFF7',
+            boxShadow: '-5px 0 20px rgba(0, 255, 247, 0.3)',
+            transition: 'right 0.3s ease-in-out',
+            zIndex: 100,
+            padding: 3,
+            overflowY: 'auto'
+          }}
+        >
+          <Typography 
+            variant="h5" 
+            sx={{ 
+              fontFamily: "'Orbitron', sans-serif",
+              color: '#00FFF7',
+              textShadow: '0 0 5px #00FFF7',
+              mb: 3
+            }}
+          >
+            CONTROL PANEL
+          </Typography>
+          
+          {/* Species selection */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="body2" gutterBottom sx={{ color: '#aaa' }}>
+              SELECT YOUR SPECIES
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              <Button
+                variant={selectedSpecies === species1.id ? "contained" : "outlined"}
+                onClick={() => setSelectedSpecies(species1.id)}
+                sx={{
+                  flex: 1,
+                  borderRadius: 2,
+                  bgcolor: selectedSpecies === species1.id ? 'rgba(255, 140, 0, 0.2)' : 'transparent',
+                  borderColor: species1Color,
+                  color: selectedSpecies === species1.id ? species1Color : '#aaa',
+                  '&:hover': {
+                    bgcolor: 'rgba(255, 140, 0, 0.3)',
+                    borderColor: species1Color
+                  }
+                }}
+              >
+                {species1Name}
+              </Button>
+              <Button
+                variant={selectedSpecies === species2.id ? "contained" : "outlined"}
+                onClick={() => setSelectedSpecies(species2.id)}
+                sx={{
+                  flex: 1,
+                  borderRadius: 2,
+                  bgcolor: selectedSpecies === species2.id ? 'rgba(0, 255, 247, 0.2)' : 'transparent',
+                  borderColor: species2Color,
+                  color: selectedSpecies === species2.id ? species2Color : '#aaa',
+                  '&:hover': {
+                    bgcolor: 'rgba(0, 255, 247, 0.3)',
+                    borderColor: species2Color
+                  }
+                }}
+              >
+                {species2Name}
+              </Button>
+            </Box>
+          </Box>
+          
+          {/* Action type toggle */}
+          <Box sx={{ mb: 3 }}>
+            <Typography variant="body2" gutterBottom sx={{ color: '#aaa' }}>
+              ACTION TYPE
+            </Typography>
+            <Box sx={{ display: 'flex', gap: 2 }}>
+              <Button
+                variant={isBuying ? "contained" : "outlined"}
+                onClick={() => setIsBuying(true)}
+                sx={{
+                  flex: 1,
+                  borderRadius: 2,
+                  bgcolor: isBuying ? 'rgba(0, 230, 118, 0.2)' : 'transparent',
+                  borderColor: '#00e676',
+                  color: isBuying ? '#00e676' : '#aaa',
+                  '&:hover': {
+                    bgcolor: 'rgba(0, 230, 118, 0.3)',
+                    borderColor: '#00e676'
+                  }
+                }}
+              >
+                BUY
+              </Button>
+              <Button
+                variant={!isBuying ? "contained" : "outlined"}
+                onClick={() => setIsBuying(false)}
+                sx={{
+                  flex: 1,
+                  borderRadius: 2,
+                  bgcolor: !isBuying ? 'rgba(244, 67, 54, 0.2)' : 'transparent',
+                  borderColor: '#f44336',
+                  color: !isBuying ? '#f44336' : '#aaa',
+                  '&:hover': {
+                    bgcolor: 'rgba(244, 67, 54, 0.3)',
+                    borderColor: '#f44336'
+                  }
+                }}
+              >
+                SELL
+              </Button>
+            </Box>
+          </Box>
+          
+          {/* Amount slider */}
+          <Box sx={{ mb: 3 }}>
+            <Typography 
+              variant="body2" 
+              gutterBottom 
+              sx={{ 
+                color: '#aaa',
+                display: 'flex',
+                justifyContent: 'space-between' 
+              }}
+            >
+              <span>AMOUNT: ${actionAmount}</span>
+              <span style={{ 
+                color: isBuying ? '#00e676' : '#f44336',
+                fontWeight: 'bold'
+              }}>
+                {isBuying ? 'POWER UP' : 'WEAKEN'}
+              </span>
+            </Typography>
+            <Slider
+              value={actionAmount}
+              onChange={handleAmountChange}
+              min={10}
+              max={1000}
+              step={10}
+              valueLabelDisplay="auto"
+              valueLabelFormat={(value) => `${value}`}
+              sx={{
+                '& .MuiSlider-thumb': {
+                  color: isBuying ? '#00e676' : '#f44336',
+                },
+                '& .MuiSlider-track': {
+                  color: isBuying ? '#00e676' : '#f44336',
+                },
+                '& .MuiSlider-rail': {
+                  color: 'rgba(255, 255, 255, 0.2)',
+                }
+              }}
+            />
+          </Box>
+          
+          {/* Execute action button */}
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={executeAction}
+            disabled={!selectedSpecies}
+            sx={{
+              borderRadius: 2,
+              py: 1.5,
+              background: isBuying 
+                ? 'linear-gradient(135deg, #00e676 0%, #00c853 100%)' 
+                : 'linear-gradient(135deg, #f44336 0%, #d32f2f 100%)',
+              boxShadow: isBuying 
+                ? '0 0 15px rgba(0, 230, 118, 0.5)' 
+                : '0 0 15px rgba(244, 67, 54, 0.5)',
+              '&:hover': {
+                background: isBuying 
+                  ? 'linear-gradient(135deg, #00e676 0%, #00c853 100%)' 
+                  : 'linear-gradient(135deg, #f44336 0%, #d32f2f 100%)',
+                boxShadow: isBuying 
+                  ? '0 0 25px rgba(0, 230, 118, 0.8)' 
+                  : '0 0 25px rgba(244, 67, 54, 0.8)',
+              }
+            }}
+          >
+            {isBuying ? 'BUY TOKEN' : 'SELL TOKEN'}
+          </Button>
+          
+          {/* Battle Log */}
+          <Box sx={{ mt: 4 }}>
+            <Typography 
+              variant="h6" 
+              gutterBottom
+              sx={{ 
+                fontFamily: "'Orbitron', sans-serif",
+                color: '#fff',
+                textShadow: '0 0 5px rgba(0, 255, 247, 0.7)',
+                letterSpacing: '0.05em'
+              }}
+            >
+              BATTLE LOG
+            </Typography>
+            
+            <Box 
+              sx={{ 
+                height: '200px', 
+                overflowY: 'auto',
+                mt: 2,
+                '&::-webkit-scrollbar': {
+                  width: '6px',
+                },
+                '&::-webkit-scrollbar-track': {
+                  background: 'rgba(0, 0, 0, 0.2)',
+                  borderRadius: 10,
+                },
+                '&::-webkit-scrollbar-thumb': {
+                  backgroundColor: 'rgba(0, 255, 247, 0.5)',
+                  borderRadius: 10,
+                }
+              }}
+            >
+              {battleLogs.slice(0, 15).map((log, index) => (
+                <Box 
+                  key={index} 
+                  sx={{ 
+                    mb: 1, 
+                    p: 1,
+                    borderRadius: 1,
+                    bgcolor: log.type === 'event' 
+                      ? 'rgba(255, 145, 0, 0.1)' 
+                      : log.type === 'attack' 
+                        ? 'rgba(244, 67, 54, 0.1)' 
+                        : 'rgba(0, 230, 118, 0.1)',
+                    borderLeft: `3px solid ${
+                      log.type === 'event' 
+                        ? '#ff9100' 
+                        : log.type === 'attack' 
+                          ? '#f44336' 
+                          : '#00e676'
+                    }`
+                  }}
+                >
+                  <Typography 
+                    variant="caption" 
+                    component="div" 
+                    sx={{ 
+                      color: '#aaa', 
+                      fontSize: '0.7rem',
+                      display: 'flex',
+                      justifyContent: 'space-between'
+                    }}
+                  >
+                    <span>{log.timestamp}</span>
+                    <span style={{ 
+                      color: log.type === 'event' 
+                        ? '#ff9100' 
+                        : log.type === 'attack' 
+                          ? '#f44336' 
+                          : '#00e676',
+                      fontWeight: 'bold'
+                    }}>
+                      {log.type.toUpperCase()}
+                    </span>
+                  </Typography>
+                  <Typography variant="body2" sx={{ color: '#fff' }}>
+                    {log.message}
+                  </Typography>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+        </Box>
+        
+        {/* Grid Background Effect */}
+        <Box 
+          sx={{ 
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            background: 'radial-gradient(circle at center, rgba(0, 255, 247, 0.1) 0%, rgba(0, 0, 0, 0) 70%)',
+            zIndex: 0,
+            pointerEvents: 'none',
+            '&::before': {
+              content: '""',
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              backgroundImage: `
+                linear-gradient(to right, rgba(0, 255, 247, 0.1) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 255, 247, 0.1) 1px, transparent 1px)
+              `,
+              backgroundSize: '40px 40px',
+              backgroundPosition: 'center center',
+              opacity: 0.5
+            }
+          }}
+        />
+      </Box>
+    </PageContainer>
+  );
+};
+
+export default Battle;
+EOF
+echo "✅ Enhanced Battle.js file created"
+
+# Add the new CSS animations and components to global.css
+echo "🔨 Adding new CSS styles to global.css..."
+cat >> src/styles/global.css << 'EOF'
+
+/* Price Streak Line */
+.price-streak-line {
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  position: relative;
+  overflow: hidden;
+}
+
+.price-streak-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, #00FFF7, #FFD93D, #FF8C00, transparent);
+  background-size: 200% 100%;
+  animation: moveStreak 8s linear infinite;
+  opacity: 0.7;
+}
+
+@keyframes moveStreak {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Volatility Line */
+.volatility-line {
+  height: 5px;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  position: relative;
+  overflow: hidden;
+}
+
+.volatility-line::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(90deg, 
+    transparent 0%,
+    #FFD93D 10%,
+    transparent 20%,
+    #FFD93D 30%,
+    transparent 40%,
+    #FFD93D 50%,
+    transparent 60%,
+    #FFD93D 70%,
+    transparent 80%,
+    #FFD93D 90%,
+    transparent 100%
+  );
+  background-size: 200% 100%;
+  animation: moveVolatility 4s linear infinite;
+}
+
+.volatility-line.volatility-medium::before {
+  background-image: linear-gradient(90deg, 
+    transparent 0%,
+    #FF8C00 10%,
+    transparent 20%,
+    #FF8C00 30%,
+    transparent 40%,
+    #FF8C00 50%,
+    transparent 60%,
+    #FF8C00 70%,
+    transparent 80%,
+    #FF8C00 90%,
+    transparent 100%
+  );
+  animation-duration: 2s;
+}
+
+.volatility-line.volatility-high::before {
+  background-image: linear-gradient(90deg, 
+    transparent 0%,
+    #A24DFF 10%,
+    transparent 20%,
+    #A24DFF 30%,
+    transparent 40%,
+    #A24DFF 50%,
+    transparent 60%,
+    #A24DFF 70%,
+    transparent 80%,
+    #A24DFF 90%,
+    transparent 100%
+  );
+  animation-duration: 1s;
+}
+
+@keyframes moveVolatility {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* Combo Icons */
+.combo-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s ease;
+}
+
+.combo-icon.active {
+  border-color: #00FFF7;
+  box-shadow: 0 0 10px #00FFF7;
+  background-color: rgba(0, 255, 247, 0.2);
+}
+
+/* Trade Streak Bar */
+.trade-streak-bar {
+  height: 15px;
+  border-radius: 7px;
+  background-color: rgba(0, 0, 0, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.trade-streak-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FFD93D, #FF8C00);
+  box-shadow: 0 0 10px rgba(255, 217, 61, 0.7);
+  border-radius: 7px;
+}
+
+/* Enhance Animations */
+@keyframes flickerNeon {
+  0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+    box-shadow: 0 0 5px #00FFF7, 0 0 10px #00FFF7;
+  }
+  20%, 24%, 55% {
+    box-shadow: none;
+  }
+}
+
+/* Character animation for attacks */
+@keyframes attackRight {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(40px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+@keyframes attackLeft {
+  0% {
+    transform: translateX(0) scaleX(-1);
+  }
+  25% {
+    transform: translateX(-40px) scaleX(-1);
+  }
+  100% {
+    transform: translateX(0) scaleX(-1);
+  }
+}
+
+@keyframes hitReactionRight {
+  0% {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+  25% {
+    transform: translateX(-20px);
+    filter: brightness(2);
+  }
+  50% {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+  75% {
+    transform: translateX(-10px);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: translateX(0);
+    filter: brightness(1);
+  }
+}
+
+@keyframes hitReactionLeft {
+  0% {
+    transform: translateX(0) scaleX(-1);
+    filter: brightness(1);
+  }
+  25% {
+    transform: translateX(20px) scaleX(-1);
+    filter: brightness(2);
+  }
+  50% {
+    transform: translateX(0) scaleX(-1);
+    filter: brightness(1);
+  }
+  75% {
+    transform: translateX(10px) scaleX(-1);
+    filter: brightness(1.5);
+  }
+  100% {
+    transform: translateX(0) scaleX(-1);
+    filter: brightness(1);
+  }
+}
+
+/* Grid background with lines and glow */
+.battle-grid {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(to right, rgba(0, 255, 247, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 255, 247, 0.1) 1px, transparent 1px);
+  background-size: 40px 40px;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.battle-grid::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle at center, rgba(0, 255, 247, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+}
+EOF
+echo "✅ Added new CSS styles to global.css"
+
+# Update App.js to modify theme colors
+echo "🔨 Updating theme colors in App.js..."
+# This is a simplistic approach and might need adjustment for your actual file structure
+sed -i '' 's/main: .#4caf50.,/main: '"'"'#FF8C00'"'"',/' src/App.js 2>/dev/null || \
+  sed -i 's/main: "#4caf50",/main: "#FF8C00",/' src/App.js 2>/dev/null || \
+  echo "⚠️ Could not update Monarch color in App.js - please manually change from #4caf50 to #FF8C00"
+
+sed -i '' 's/main: .#9c27b0.,/main: '"'"'#00FFF7'"'"',/' src/App.js 2>/dev/null || \
+  sed -i 's/main: "#9c27b0",/main: "#00FFF7",/' src/App.js 2>/dev/null || \
+  echo "⚠️ Could not update Sloth color in App.js - please manually change from #9c27b0 to #00FFF7"
+
+echo "✅ Theme colors updated"
+
+# Install required Google Fonts if not already included
+echo "🔨 Checking Google Fonts imports..."
+if ! grep -q "Space Mono" src/styles/global.css; then
+  sed -i '' '/@import url/a\
+@import url('"'"'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap'"'"');
+' src/styles/global.css 2>/dev/null || \
+  sed -i '/@import url/a @import url('"'"'https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap'"'"');' src/styles/global.css 2>/dev/null || \
+  echo "⚠️ Could not add Space Mono font import - please manually add it to global.css"
+fi
+
+echo "✅ Font imports verified"
+
+# Final instructions
+echo "
+🎮 Final Trade UI upgrade is complete! 🎮
+
+The changes include:
+  ✅ Street Fighter-style battle layout with centered characters
+  ✅ Neon cyberpunk styling with glowing elements
+  ✅ Symmetrical stat panels for both species
+  ✅ Enhanced animations and visual effects
+  ✅ Color scheme that matches the mockup
+
+To test your changes:
+  $ npm start
+
+If you need to revert any changes:
+  $ cp backups/Battle.js.backup src/pages/Battle.js
+  $ cp backups/global.css.backup src/styles/global.css
+
+When you're satisfied, deploy to GitHub Pages:
+  $ npm run build
+  $ npm run deploy
+"
+#!/bin/bash
+
+echo "🚀 Starting Final Trade UI upgrade..."
+echo "Creating backups of original files..."
+
+# Create backups
+mkdir -p backups
+cp src/pages/Battle.js backups/Battle.js.backup
+cp src/styles/global.css backups/global.css.backup
+echo "✅ Backups created in 'backups' directory"
+
+# Check if PageContainer component exists
+if [ ! -f "src/components/common/PageContainer.js" ]; then
+  echo "🔨 Creating PageContainer component..."
+  mkdir -p src/components/common
+  cat > src/components/common/PageContainer.js << 'EOF'
+import React from 'react';
+import { Box } from '@mui/material';
+
+const PageContainer = ({ backgroundImage, children, overlay = true }) => {
+  return (
+    <Box
+      sx={{
+        backgroundImage: `url(${process.env.PUBLIC_URL}/assets/images/${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundAttachment: 'fixed',
+        minHeight: 'calc(100vh - 160px)',
+        padding: '24px 0',
+        position: 'relative',
+      }}
+    >
+      {overlay && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            backgroundColor: 'rgba(10, 10, 15, 0.6)',
+            zIndex: -1,
+          }}
+        />
+      )}
+      {children}
+    </Box>
+  );
+};
+
+export default PageContainer;
+EOF
+  echo "✅ PageContainer component created"
+else
+  echo "✓ PageContainer component already exists"
+fi
+
+# Create the enhanced Battle.js
+echo "🔨 Creating enhanced Battle.js with Street Fighter style layout..."
+cat > src/pages/Battle.js << 'EOF'
+// src/pages/Battle.js
+import React, { useState, useEffect, useContext } from 'react';
+import { useLocation } from 'react-router-dom';
+import { 
+  Container, 
+  Grid, 
+  Box, 
+  Typography, 
+  Card, 
+  Button, 
+  LinearProgress,
+  Divider,
+  Paper,
+  Slider,
+  IconButton
+} from '@mui/material';
+import PageContainer from '../components/common/PageContainer';
+import { GameContext } from '../contexts/GameContext';
+import { Web3Context } from '../contexts/Web3Context';
+
+const Battle = () => {
+  const location = useLocation();
+  const { 
+    tokenData, 
+    healthScores, 
+    currentMoves, 
+    battleLogs, 
+    handleMarketAction,
+    autoUpdate,
+    setAutoUpdate,
+    fetchTokenData
+  } = useContext(GameContext);
+  const { isConnected, connectWallet } = useContext(Web3Context);
+  
+  // Local state
+  const [selectedSpecies, setSelectedSpecies] = useState(null);
+  const [actionAmount, setActionAmount] = useState(100);
+  const [isBuying, setIsBuying] = useState(true);
+  const [showControlPanel, setShowControlPanel] = useState(false);
+
+  // Get token config from context
+  const { tokenConfig } = useContext(GameContext);
+  const species1 = tokenConfig?.species1 || { id: 'monarch', symbol: '$MNRCH' };
+  const species2 = tokenConfig?.species2 || { id: 'sloth', symbol: '$3TOED' };
+
+  // Set selected species from navigation if available
+  useEffect(() => {
+    if (location.state && location.state.species) {
+      setSelectedSpecies(location.state.species === 'monarch' ? species1.id : species2.id);
+    }
+  }, [location, species1, species2]);
+
+  // Format large numbers
+  const formatNumber = (num) => {
+    if (num >= 1000000) return `$${(num / 1000000).toFixed(2)}M`;
+    if (num >= 1000) return `$${(num / 1000).toFixed(1)}K`;
+    return `$${num.toFixed(2)}`;
+  };
+
+  // Handle market action
+  const executeAction = () => {
+    if (!selectedSpecies) {
+      // If no species selected, prompt user to select
+      return;
+    }
+    
+    if (!isConnected) {
+      connectWallet();
+      return;
+    }
+    
+    handleMarketAction(
+      isBuying ? 'buy' : 'sell',
+      selectedSpecies,
+      actionAmount
+    );
+  };
+
+  // Handle amount change
+  const handleAmountChange = (event, newValue) => {
+    setActionAmount(newValue);
+  };
+  
+  // Determine species names and colors
+  const species1Name = "MONARCH";
+  const species2Name = "SLOTH";
+  
+  const species1Color = '#FF8C00'; // Monarch: Sunset Amber
+  const species2Color = '#00FFF7'; // Sloth: Neon Cyan
+  
+  // Calculate progress percentage for market cap
+  const getCapProgress = (marketCap) => {
+    return Math.min((marketCap / 1000000) * 100, 100);
+  };
+
+  // Get volatility level class
+  const getVolatilityClass = (volatility) => {
+    if (volatility >= 0.8) return 'volatility-high';
+    if (volatility >= 0.65) return 'volatility-medium';
+    return 'volatility-normal';
+  };
+
+  // Calculate health bar segments
+  const getHealthSegments = (health) => {
+    const segments = [];
+    const totalSegments = 10;
+    const segmentsLit = Math.round(health / 100 * totalSegments);
+    
+    for (let i = 0; i < totalSegments; i++) {
+      segments.push(i < segmentsLit ? 'active' : 'inactive');
+    }
+    
+    return segments;
+  };
+
+  return (
+    <PageContainer backgroundImage="Deep_Blue_Cyber.png">
+      <Box 
+        sx={{ 
+          minHeight: '100vh',
+          position: 'relative',
+          overflow: 'hidden',
+          p: { xs: 1, md: 3 }
+        }}
+      >
+        {/* Top Bar with Market Cap */}
+        <Box 
+          sx={{ 
+            position: 'relative',
+            mb: 2,
+            textAlign: 'center',
+            zIndex: 2
+          }}
+        >
+          <Typography 
+            variant="h2" 
+            sx={{ 
+              fontFamily: "'Orbitron', sans-serif",
+              fontSize: { xs: '2rem', md: '3rem' },
+              mb: 1,
+              color: '#fff',
+              textShadow: '0 0 10px #FF3EC9, 0 0 20px #FF3EC9',
+              display: 'inline-block',
+              px: 4,
+              py: 0.5,
+              position: 'relative',
+              '&::before': {
+                content: '""',
+                position: 'absolute',
+                top: 0,
+                left: 0,
+                right: 0,
+                bottom: 0,
+                borderRadius: 8,
+                padding: '2px',
+                background: 'linear-gradient(135deg, #FF3EC9, #00FFF7)',
+                WebkitMask: 'linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)',
+                WebkitMaskComposite: 'xor',
+                maskComposite: 'exclude',
+                zIndex: -1
+              }
+            }}
+          >
+            MARKET CAP
+          </Typography>
+          
+          {/* Auto Update Toggle */}
+          <Box sx={{ 
+            position: 'absolute', 
+            top: '50%', 
+            right: 10, 
+            transform: 'translateY(-50%)',
+            display: 'flex',
+            gap: 1
+          }}>
+            <Button 
+              variant={autoUpdate ? "contained" : "outlined"} 
+              color="primary"
+              onClick={() => setAutoUpdate(!autoUpdate)}
+              size="small"
+              sx={{ 
+                borderRadius: 4,
+                boxShadow: autoUpdate ? '0 0 10px rgba(0, 255, 247, 0.7)' : 'none'
+              }}
+            >
+              {autoUpdate ? "SIM ON" : "SIM OFF"}
+            </Button>
+            <Button 
+              variant="outlined" 
+              color="info"
+              onClick={fetchTokenData}
+              size="small"
+              sx={{ borderRadius: 4 }}
+            >
+              REFRESH
+            </Button>
+          </Box>
+        </Box>
+
+        {/* Main Battle Area */}
+        <Grid container spacing={0} sx={{ position: 'relative', mb: 2, zIndex: 2 }}>
+          {/* Left Character (Sloth) */}
+          <Grid item xs={5} md={5} sx={{ position: 'relative' }}>
+            {/* Character Name */}
+            <Box sx={{ 
+              mb: 2, 
+              textAlign: 'center', 
+              position: 'relative',
+              display: 'inline-block',
+              px: 2,
+              py: 0.5,
+              borderRadius: 4,
+              border: `2px solid ${species2Color}`,
+              boxShadow: `0 0 15px ${species2Color}`,
+              background: 'rgba(0, 0, 0, 0.5)',
+            }}>
+              <Typography
+                variant="h4"
+                sx={{
+                  fontFamily: "'Orbitron', sans-serif",
+                  color: species2Color,
+                  textShadow: `0 0 10px ${species2Color}`,
+                  letterSpacing: '0.1em',
+                  fontWeight: 'bold'
+                }}
+              >
+                {species2Name}
+              </Typography>
+            </Box>
+
+            {/* Health Bar (DNA Style) */}
+            <Box sx={{ mb: 1, px: 2 }}>
+              <Box sx={{ 
+                display: 'flex', 
+                justifyContent: 'space-between',
+                gap: 1,
+                mb: 0.5
+              }}>
